@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonido El Mexa | Renta de Equipos para Eventos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #8a2be2; /* Violeta eléctrico */
+            --color-secondary: #00bfff; /* Azul brillante */
+            --color-accent: #ff00ff; /* Rosa neón */
+            --color-dark: #0f0f1a;
+            --color-light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Efectos de luces de fiesta */
+        .light-effect {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: -1;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .light-1 {
+            background: var(--color-primary);
+            top: 20%;
+            left: 10%;
+        }
+
+        .light-2 {
+            background: var(--color-secondary);
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .light-3 {
+            background: var(--color-accent);
+            bottom: 10%;
+            left: 40%;
+            animation-delay: 8s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(50px, 50px);
+            }
+            50% {
+                transform: translate(-50px, 30px);
+            }
+            75% {
+                transform: translate(30px, -50px);
+            }
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(15, 15, 26, 0.8);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--color-primary);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--color-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--color-primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--color-light);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(15, 15, 26, 0.7), rgba(15, 15, 26, 0.9));
+            z-index: -1;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.8;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero h2 span {
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-light);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(138, 43, 226, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Servicios */
+        .services {
+            padding: 5rem 5%;
+            background-color: rgba(15, 15, 26, 0.8);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #aaa;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: rgba(30, 30, 46, 0.6);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.2);
+            border-color: rgba(0, 191, 255, 0.4);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .service-features i {
+            color: var(--color-primary);
+            font-size: 0.8rem;
+        }
+
+        /* Galería */
+        .gallery {
+            padding: 5rem 5%;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Testimonios */
+        .testimonials {
+            padding: 5rem 5%;
+            background-color: rgba(15, 15, 26, 0.8);
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial {
+            background-color: rgba(30, 30, 46, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            display: none;
+        }
+
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .client-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 3px solid var(--color-primary);
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #ccc;
+        }
+
+        .client-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .client-role {
+            color: var(--color-primary);
+            font-size: 0.9rem;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(138, 43, 226, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .slider-dot.active {
+            background-color: var(--color-primary);
+        }
+
+        /* Contacto */
+        .contact {
+            padding: 5rem 5%;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: rgba(30, 30, 46, 0.6);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            color: white;
+        }
+
+        .contact-text h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-text p, .contact-text a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-text a:hover {
+            color: var(--color-primary);
+        }
+
+        .contact-form {
+            background-color: rgba(30, 30, 46, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            background-color: rgba(15, 15, 26, 0.8);
+            color: white;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #25D366;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(15, 15, 26, 0.9);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo i {
+            font-size: 2rem;
+            color: var(--color-primary);
+        }
+
+        .footer-logo h2 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(138, 43, 226, 0.2);
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--color-primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--color-dark);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: left 0.3s;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efectos de luces -->
+    <div class="light-effect light-1"></div>
+    <div class="light-effect light-2"></div>
+    <div class="light-effect light-3"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-volume-up"></i>
+            <h1>Sonido <span>El Mexa</span></h1>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+            <ul id="navMenu">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#gallery">Galería</a></li>
+                <li><a href="#testimonials">Testimonios</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Concierto con luces y audio" class="hero-bg">
+        <div class="hero-content">
+            <h2>Ilumina tu evento con <span>sonido profesional</span></h2>
+            <p>Ofrecemos los mejores equipos de audio e iluminación para hacer de tu fiesta, concierto o evento corporativo una experiencia inolvidable. Calidad garantizada y servicio personalizado.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i> Cotizar Ahora
+                </a>
+                <a href="#services" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i> Nuestros Servicios
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="services" id="services">
+        <div class="section-title">
+            <h2>Nuestros Servicios</h2>
+            <p>Equipos de última generación y técnicos especializados para cada tipo de evento</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h3>Sistemas de Audio</h3>
+                <p>Sonido profesional para cualquier tipo de evento, desde fiestas privadas hasta conciertos masivos.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Sistemas de línea array</li>
+                    <li><i class="fas fa-check"></i> Subwoofers de alta potencia</li>
+                    <li><i class="fas fa-check"></i> Mezcladoras digitales</li>
+                    <li><i class="fas fa-check"></i> Micrófonos inalámbricos</li>
+                    <li><i class="fas fa-check"></i> Monitoreo en escena</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Iluminación Profesional</h3>
+                <p>Efectos visuales impactantes que transformarán cualquier espacio en un espectáculo.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Luces LED móviles</li>
+                    <li><i class="fas fa-check"></i> Láseres y hazers</li>
+                    <li><i class="fas fa-check"></i> Controladores DMX</li>
+                    <li><i class="fas fa-check"></i> Pantallas LED</li>
+                    <li><i class="fas fa-check"></i> Diseño personalizado</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <h3>DJ Equipment</h3>
+                <p>Todo lo necesario para que tu DJ pueda ofrecer el mejor performance.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Consolas Pioneer/CDJ</li>
+                    <li><i class="fas fa-check"></i> Controladores MIDI</li>
+                    <li><i class="fas fa-check"></i> Software profesional</li>
+                    <li><i class="fas fa-check"></i> Monitores de estudio</li>
+                    <li><i class="fas fa-check"></i> Asesoría técnica</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section class="gallery" id="gallery">
+        <div class="section-title">
+            <h2>Nuestro Trabajo</h2>
+            <p>Algunos de los eventos donde hemos participado con nuestro equipo y experiencia</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Evento con luces">
+                <div class="gallery-overlay">
+                    <h3>Fiesta Universitaria</h3>
+                    <p>Iluminación LED y sistema de audio de 10,000W</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Concierto al aire libre">
+                <div class="gallery-overlay">
+                    <h3>Festival Musical</h3>
+                    <p>Sistema de línea array para 5,000 personas</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="DJ en acción">
+                <div class="gallery-overlay">
+                    <h3>Club Nocturno</h3>
+                    <p>Equipo completo para DJ con iluminación sincronizada</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1533174075245-9836817afce8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Boda con luces">
+                <div class="gallery-overlay">
+                    <h3>Boda Elegante</h3>
+                    <p>Iluminación ambiental y sonido para recepción</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Evento corporativo">
+                <div class="gallery-overlay">
+                    <h3>Convención Empresarial</h3>
+                    <p>Sistema de conferencia y pantallas LED</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title">
+            <h2>Lo que dicen nuestros clientes</h2>
+            <p>Experiencias reales de quienes han confiado en nuestros servicios</p>
+        </div>
+        <div class="testimonials-slider">
+            <div class="testimonial active">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente satisfecha" class="client-photo">
+                <p>"Contraté a Luminance Audio para mi boda y fue la mejor decisión. El sonido era impecable y la iluminación creó una atmósfera mágica. Todos mis invitados preguntaron por el servicio."</p>
+                <h4 class="client-name">María González</h4>
+                <p class="client-role">Novia</p>
+            </div>
+            <div class="testimonial">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente satisfecho" class="client-photo">
+                <p>"Como organizador de eventos, he trabajado con muchas compañías de audio e iluminación. Luminance destaca por su profesionalismo, equipos de calidad y atención personalizada."</p>
+                <h4 class="client-name">Carlos Mendoza</h4>
+                <p class="client-role">Event Planner</p>
+            </div>
+            <div class="testimonial">
+                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Cliente satisfecho" class="client-photo">
+                <p>"El equipo técnico resolvió rápidamente un problema de audio durante nuestro festival. Su respuesta rápida y conocimiento salvó el evento. Definitivamente los recomiendo."</p>
+                <h4 class="client-name">Javier Ruiz</h4>
+                <p class="client-role">Organizador de Festival</p>
+            </div>
+            <div class="slider-controls">
+                <div class="slider-dot active" data-slide="0"></div>
+                <div class="slider-dot" data-slide="1"></div>
+                <div class="slider-dot" data-slide="2"></div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/525512345678?text=Hola%20Luminance%20Audio,%20me%20interesa%20cotizar%20sus%20servicios" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Testimonial Slider
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            testimonials[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        
+</body>
+</html>
+
